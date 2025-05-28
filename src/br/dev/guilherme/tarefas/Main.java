@@ -7,25 +7,40 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.UUID;
 
+import br.dev.guilherme.tarefas.dao.FuncionarioDAO;
 import br.dev.guilherme.tarefas.model.Funcionario;
 import br.dev.guilherme.tarefas.model.Status;
 import br.dev.guilherme.tarefas.model.Tarefa;
+import br.dev.guilherme.tarefas.utils.Utils;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
-		Funcionario funcionario = new Funcionario("Guilherme");
+		Funcionario funcionario = new Funcionario("Guilherme", "Programador");
+		funcionario.setSetor("Técnologia da Informação");
+		funcionario.setSalario(8489.98);
+		
+		FuncionarioDAO dao = new FuncionarioDAO(funcionario);
+		dao.gravar();
 		
 		
-		Tarefa tarefa = new Tarefa(funcionario); //o construtor do tarefa precisa de um funcionario
-		tarefa.setNome("Lavar a louça");
-		tarefa.setDescricao("lavar a louça antes de mãe chegar.");
-		tarefa.setDataInicio(LocalDate.of(2025, 5, 21));
-		tarefa.setPrazo(1);
-		tarefa.setStatus(Status.EM_ANDAMENTO);
 		
+		//   NÃO SERÁ MAIS UTILZIADO
+//		System.out.println(funcionario.toString());
+//		
+//		
+//		Tarefa tarefa = new Tarefa(funcionario); //o construtor do tarefa precisa de um funcionario
+//		tarefa.setNome("Lavar a louça");
+//		tarefa.setDescricao("lavar a louça antes da mãe chegar.");
+//		tarefa.setDataInicio(LocalDate.of(2025, 5, 21));
+//		tarefa.setPrazo(1);
+//		tarefa.setStatus(Status.EM_ANDAMENTO);
+//		
+//		
+//		System.out.println(Utils.gerarUUID8());
 		
 		
 		//testarLeituraEscritaArquivo();
