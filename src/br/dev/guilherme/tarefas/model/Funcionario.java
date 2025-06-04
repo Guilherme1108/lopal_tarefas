@@ -13,7 +13,7 @@ public class Funcionario {
 	//métodos construtores
 
 	public Funcionario(String nome) { // o método construtor faz com que personalizamos como pedimos para criar um obejto
-		System.out.printf("criando um funcionario %s como %s.", nome, cargo);
+//		System.out.printf("criando um funcionario %s como %s.", nome, cargo);
 		setNome(nome);
 		setMatricula(Utils.gerarUUID8());
 	}
