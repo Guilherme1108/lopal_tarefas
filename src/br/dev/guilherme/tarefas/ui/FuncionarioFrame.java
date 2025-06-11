@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -30,14 +31,14 @@ public class FuncionarioFrame {
 	private JButton btnSalvar;
 	private JButton btnSair;
 	
-	public FuncionarioFrame() {
-		criarTela();
+	public FuncionarioFrame(JFrame pai) { //o JFrame tambem poderia ser criado como um atributo da classe
+		criarTela(pai);
 	}
 	
-	private void criarTela() {
-		JFrame telaFuncionario = new JFrame("Cadastro de Funcionários");
+	private void criarTela(JFrame pai) {
+		JDialog telaFuncionario = new JDialog(pai, true); //o JDialog foi a soluão para quando clicar em fechar não fechar tudo
 		telaFuncionario.setSize(370, 500);
-		telaFuncionario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		telaFuncionario.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		telaFuncionario.setLayout(null);
 		telaFuncionario.setResizable(false);
 		telaFuncionario.setLocationRelativeTo(null); //faz referencia para a tela aparecer em algum lugar da tela, como é null, ela irá aparecer no meio
@@ -123,7 +124,7 @@ public class FuncionarioFrame {
 				int resposta = JOptionPane.showConfirmDialog(telaFuncionario, "Deseja sair do sistema?", "Atenção", JOptionPane.YES_NO_OPTION);
 				
 				if (resposta == 0) {
-					System.exit(JFrame.EXIT_ON_CLOSE);
+					telaFuncionario.dispose(); //usado só para fechar o tela funcionario do que fechar tudo
 				}
 	//			System.exit(JFrame.EXIT_ON_CLOSE); //essa funcao serve para encerrar o programa, no lugar do exit_on_close poderia ser o numero 0 )
 				

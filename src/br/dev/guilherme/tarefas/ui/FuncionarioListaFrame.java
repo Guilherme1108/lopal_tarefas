@@ -3,6 +3,8 @@ package br.dev.guilherme.tarefas.ui;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,9 +53,23 @@ public class FuncionarioListaFrame {
 		scrollFuncionarios.setBounds(10, 70, 680, 300);
 		carregarDadosTabela();
 		
+		btnNovo = new JButton("Cadastrar novo funcionário");
+		btnNovo.setBounds(10, 400, 250, 50);
+		
+		btnNovo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new FuncionarioFrame(telaFuncionarioLista);		
+				carregarDadosTabela();
+			}
+		});
+		
+		
 		//container
 		painel.add(labelTitulo);
 		painel.add(scrollFuncionarios);
+		painel.add(btnNovo);
 		
 		telaFuncionarioLista.setVisible(true);
 	}

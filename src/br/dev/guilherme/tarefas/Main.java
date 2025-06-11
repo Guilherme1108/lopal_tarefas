@@ -24,7 +24,8 @@ public class Main {
 		FuncionarioDAO dao = new FuncionarioDAO(null);
 		dao.getFuncionarios();
 		new FuncionarioListaFrame();
-		//new FuncionarioFrame();
+		
+//		new FuncionarioFrame();
 		
 //		Funcionario funcionario = new Funcionario("Guilherme", "Programador");
 //		funcionario.setSetor("Técnologia da Informação");
