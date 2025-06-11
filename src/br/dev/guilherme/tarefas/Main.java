@@ -23,7 +23,7 @@ public class Main {
 		
 		FuncionarioDAO dao = new FuncionarioDAO(null);
 		dao.getFuncionarios();
-		//new FuncionarioListaFrame();
+		new FuncionarioListaFrame();
 		//new FuncionarioFrame();
 		
 //		Funcionario funcionario = new Funcionario("Guilherme", "Programador");

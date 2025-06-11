@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import br.dev.guilherme.tarefas.dao.FuncionarioDAO;
 import br.dev.guilherme.tarefas.model.Funcionario;
 
 public class FuncionarioListaFrame {
@@ -22,7 +23,6 @@ public class FuncionarioListaFrame {
 	private DefaultTableModel model; //dados da tabela
 	private JTable tabelaFuncionarios; //tabela visualmente
 	private JScrollPane scrollFuncionarios; //container da tabela
-	
 	String[] colunas = { "CÓDIGO", "NOME FUNCIONÁRIO", "CARGO" };
 	
 	public FuncionarioListaFrame() {
@@ -45,7 +45,6 @@ public class FuncionarioListaFrame {
 		labelTitulo.setForeground(Color.RED);
 		
 		// CRIAR TABELA
-
 		model = new DefaultTableModel(colunas, 100); //adicionando as linhas a tabela
 		tabelaFuncionarios = new JTable(model);
 		scrollFuncionarios = new JScrollPane(tabelaFuncionarios);
@@ -62,6 +61,8 @@ public class FuncionarioListaFrame {
 	private void carregarDadosTabela() {
 		
 		List<Funcionario> funcionarios = new ArrayList<>();
+		FuncionarioDAO dao = new FuncionarioDAO(null);
+		funcionarios = dao.getFuncionarios();
 		
 		int i = 0;
 		
