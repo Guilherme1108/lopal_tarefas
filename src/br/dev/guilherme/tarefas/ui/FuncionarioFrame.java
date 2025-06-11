@@ -1,6 +1,5 @@
 package br.dev.guilherme.tarefas.ui;
 
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -121,7 +120,7 @@ public class FuncionarioFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int resposta = JOptionPane.showConfirmDialog(telaFuncionario, "Deseja sair do sistema?", "Atenção", JOptionPane.YES_NO_OPTION);
+				int resposta = JOptionPane.showConfirmDialog(telaFuncionario, "Deseja sair do cadastro de funcionários?", "Atenção", JOptionPane.YES_NO_OPTION);
 				
 				if (resposta == 0) {
 					telaFuncionario.dispose(); //usado só para fechar o tela funcionario do que fechar tudo
