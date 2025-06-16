@@ -65,7 +65,7 @@ public class TarefaListaFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new FuncionarioFrame(pai);
+				new TarefaFrame(pai);
 				carregarDadosTabela();
 			}
 		});
