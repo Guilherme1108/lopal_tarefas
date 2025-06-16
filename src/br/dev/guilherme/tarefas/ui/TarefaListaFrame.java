@@ -16,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import br.dev.guilherme.tarefas.dao.TarefaDAO;
 import br.dev.guilherme.tarefas.model.Tarefa;
 
 public class TarefaListaFrame {
@@ -26,7 +27,7 @@ public class TarefaListaFrame {
 	private DefaultTableModel model; // dados da tabela
 	private JTable tabelaFuncionarios; // tabela visualmente
 	private JScrollPane scrollFuncionarios; // container da tabela
-	String[] colunas = { "CÓDIGO", "STATUS", "DATA DE INICIO", "DATA DE ENTREGA" };
+	String[] colunas = { "CÓDIGO", "STATUS", "RESPONSÁVEL", "DATA DE INICIO", "DATA DE ENTREGA" };
 
 	public TarefaListaFrame(JFrame pai) {
 		criarTela(pai);
@@ -54,7 +55,7 @@ public class TarefaListaFrame {
 		scrollFuncionarios.setBounds(10, 70, 680, 300);
 		carregarDadosTabela();
 
-		btnNovo = new JButton("Cadastrar novo funcionário");
+		btnNovo = new JButton("Criar uma nova tarefa");
 		btnNovo.setBounds(10, 400, 250, 50);
 
 		btnSair = new JButton("Sair");
@@ -90,26 +91,28 @@ public class TarefaListaFrame {
 		telaTarefaLista.setVisible(true);
 	}
 
-//	private void carregarDadosTabela() {
-//
-//		List<Tarefa> tarefas = new ArrayList<>();
-//		TarefaDAO dao = new TarefaDAO(null);
-//		tarefas = dao.getFuncionarios();
-//
-//		int i = 0;
-//
-//		Object[][] dados = new Object[funcionarios.size()][3];
-//
-//		for (Funcionario f : funcionarios) {
-//			dados[i][0] = f.getMatricula();
-//			dados[i][1] = f.getNome();
-//			dados[i][2] = f.getCargo();
-//
-//			i++;
-//
-//		}
-//		model.setDataVector(dados, colunas);
-//	}
+	private void carregarDadosTabela() {
+
+		List<Tarefa> tarefas = new ArrayList<>();
+		TarefaDAO dao = new TarefaDAO(null);
+
+		int i = 0;
+
+		Object[][] dados = new Object[tarefas.size()][5];
+
+		for (Tarefa t : tarefas) {
+			dados[i][0] = t.getIdentificacao();
+			dados[i][1] = t.getStatus();
+			dados[i][2] = t.getResponsavel();
+			dados[i][3] = t.getDataInicio();
+			dados[i][4] = t.getDataEntrega();
+			
+
+			i++;
+
+		}
+		model.setDataVector(dados, colunas);
+	}
 
 
 }

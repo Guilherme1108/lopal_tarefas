@@ -1,6 +1,7 @@
 package br.dev.guilherme.tarefas.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import br.dev.guilherme.tarefas.utils.Utils;
 
@@ -14,13 +15,16 @@ public class Tarefa {
 	private int prazo;
 	private LocalDate dataEntrega;
 	private Status status;
-	
+
+	private String dataInicioFormatada;
+	private String dataEntregaFormatada;
+
 	// construtor
 	public Tarefa(Funcionario responsalvel) {
 		this.responsavel = responsalvel;
 		this.identificacao = Utils.gerarUUID8();
 	}
-	
+
 	public String getIdentificacao() {
 		return identificacao;
 	}
@@ -49,7 +53,7 @@ public class Tarefa {
 		return responsavel;
 	}
 
-	public void setResponsavel(Funcionario responsavel) {
+	public void setResponsavel(String matricula) {
 		this.responsavel = responsavel;
 	}
 
@@ -57,8 +61,9 @@ public class Tarefa {
 		return dataInicio;
 	}
 
-	public void setDataInicio(LocalDate dataInicio) {
-		this.dataInicio = dataInicio;
+	public void setDataInicio(String dataFormatada) {
+		this.dataInicio = LocalDate.parse(dataFormatada, DateTimeFormatter.ofPattern("dd/MM/yyyy"));  //converte para LocalDate
+		dataInicioFormatada = dataInicio.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")); //converte do LocalDate para formato de texto novamente
 	}
 
 	public int getPrazo() {
@@ -77,20 +82,30 @@ public class Tarefa {
 		return dataEntrega;
 	}
 
-	public void setDataEntrega(LocalDate dataEntrega) {
-		this.dataEntrega = dataEntrega;
+	public void setDataEntrega(String dataFormatada) {
+		this.dataEntrega = LocalDate.parse(dataFormatada, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		dataEntregaFormatada = dataEntrega.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 	}
 
 	public Status getStatus() {
 		LocalDate hoje = LocalDate.now();
-		//criar o esquema lógico de abtes e depois
-			
-			
+		if (hoje.isBefore(dataInicio)) {
+			status = Status.NAO_INICIADO;
+
+		} else if (!hoje.isAfter(dataEntrega)) {
+			status = Status.EM_ANDAMENTO;
+
+		} else {
+			status = Status.EM_ATRASO;
+		}
+
 		return status;
 	}
 
-	public void setStatus(Status status) {
-		this.status = status;
+	
+	@Override
+	public String toString() {
+		return identificacao + "," + nome + "," + descricao + "," + responsavel + "," + dataInicioFormatada + "," + dataEntregaFormatada + "," + status;
 	}
 
 }

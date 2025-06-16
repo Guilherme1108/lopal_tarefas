@@ -62,6 +62,15 @@ public class GerenciamentoPrincipalFrame {
 			}
 		});
 		
+		btnTarefas.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new TarefaListaFrame(telaPrincipal);
+				
+			}
+		});
+		
 		telaPrincipal.setVisible(true);
 	}
 
