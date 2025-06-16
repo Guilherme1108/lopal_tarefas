@@ -2,8 +2,11 @@ package br.dev.guilherme.tarefas.model;
 
 import java.time.LocalDate;
 
+import br.dev.guilherme.tarefas.utils.Utils;
+
 public class Tarefa {
 
+	private String identificacao;
 	private String nome;
 	private String descricao;
 	private Funcionario responsavel;
@@ -15,8 +18,16 @@ public class Tarefa {
 	// construtor
 	public Tarefa(Funcionario responsalvel) {
 		this.responsavel = responsalvel;
+		this.identificacao = Utils.gerarUUID8();
 	}
 	
+	public String getIdentificacao() {
+		return identificacao;
+	}
+
+	public void setIdentificacao(String identificacao) {
+		this.identificacao = identificacao;
+	}
 
 	public String getNome() {
 		return nome;

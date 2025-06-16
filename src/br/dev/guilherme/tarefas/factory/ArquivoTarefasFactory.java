@@ -6,9 +6,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class ArquivoFuncionarioFactory {
-
-	private String caminho = "C:\\Users\\guilh\\Documents\\caminhoDosArquivos/funcionarios.csv.txt"; // criando um caminho para o arquivo
+public class ArquivoTarefasFactory {
+	
+	private String caminhoTarefas = "C:\\Users\\guilh\\Documents\\caminhoDosArquivos/tarefas.csv.txt"; // criando um caminho para o arquivo
 	private FileWriter fw;
 	private BufferedWriter bw;
 	private FileReader fr;
@@ -16,17 +16,16 @@ public class ArquivoFuncionarioFactory {
 
 	public BufferedWriter getBw() throws IOException { //esse throws IOExpeption faz a execao (erro) ir para quem chamou ele
 		
-		fw = new FileWriter(caminho, true);
+		fw = new FileWriter(caminhoTarefas, true);
 		bw = new BufferedWriter(fw);
 		
 		return bw;
 	}
 	
 	public BufferedReader getBr() throws IOException {
-		fr = new FileReader(caminho);
+		fr = new FileReader(caminhoTarefas);
 		br = new BufferedReader(fr);
 		return br;
 	}
-	
 
 }
