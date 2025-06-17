@@ -17,7 +17,6 @@ import javax.swing.UIManager;
 import br.dev.guilherme.tarefas.dao.FuncionarioDAO;
 import br.dev.guilherme.tarefas.dao.TarefaDAO;
 import br.dev.guilherme.tarefas.model.Funcionario;
-import br.dev.guilherme.tarefas.model.Status;
 import br.dev.guilherme.tarefas.model.Tarefa;
 import br.dev.guilherme.tarefas.utils.Utils;
 
@@ -81,7 +80,8 @@ public class TarefaFrame {
 		
 		labelResponsavel = new JLabel("Responsável");
 		labelResponsavel.setBounds(10, 255, 150, 30);
-		boxResponsavel = new JComboBox<String>();
+		FuncionarioDAO funcionarioDAO = new FuncionarioDAO(null);
+		boxResponsavel = new JComboBox<>(funcionarioDAO.getNomesFuncionariosArray());
 		boxResponsavel.setBounds(10, 285, 350, 30);
 
 		labelDataInicio = new JLabel("Data de início");
@@ -135,17 +135,20 @@ public class TarefaFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Tarefa t = new Tarefa(txtNome.getText());
+				Tarefa t = new Tarefa();
 				t.setIdentificacao(txtIdentificacao.getText());
+				t.setNome(txtNome.getText());
 				t.setDescricao(txtDescricacao.getText());
-//				t.setResponsavel(boxResponsavel.getSelectedIndex());
+
+				Funcionario responsavelSelecionado = (Funcionario) boxResponsavel.getSelectedItem();
+				t.setResponsavel(responsavelSelecionado);
 				
 				TarefaDAO dao = new TarefaDAO(t);
 				boolean sucesso = dao.gravar();
 				
 				if (sucesso) {
 					JOptionPane.showMessageDialog(telaTarefa, "Tarefa criada com sucesso!");
-//					limparFormulario(); //chamando o limpar formulario se dar certo
+					limparFormulario(); //chamando o limpar formulario se dar certo
 				} else {
 					JOptionPane.showMessageDialog(telaTarefa, "ocorreu um erro na gravação. \ntente novamente. \nSe o problema persistir, entre em contato com o suporte.");
 				}

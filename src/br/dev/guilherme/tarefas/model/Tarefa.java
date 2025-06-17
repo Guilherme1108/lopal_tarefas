@@ -20,8 +20,12 @@ public class Tarefa {
 	private String dataEntregaFormatada;
 
 	// construtor
-	public Tarefa(String nome) {
-		setNome(nome);
+    public Tarefa() {
+        this.identificacao = Utils.gerarUUID8();
+    }
+	
+	public Tarefa(Funcionario funcionario) {
+		setResponsavel(funcionario);
 		this.identificacao = Utils.gerarUUID8();
 	}
 
@@ -53,7 +57,7 @@ public class Tarefa {
 		return responsavel;
 	}
 
-	public void setResponsavel(String matricula) {
+	public void setResponsavel(Funcionario responsavel) {
 		this.responsavel = responsavel;
 	}
 
@@ -105,7 +109,7 @@ public class Tarefa {
 	
 	@Override
 	public String toString() {
-		return identificacao + "," + nome + "," + descricao + "," + responsavel + "," + dataInicioFormatada + "," + dataEntregaFormatada + "," + status;
+		return identificacao + "," + nome + "," + descricao + "," + responsavel + "," + dataInicioFormatada + "," + dataEntregaFormatada + "," + status + "\n";
 	}
 
 }

@@ -63,4 +63,32 @@ public class FuncionarioDAO {
 			return null;
 		}
 	}
+	
+	//método criado para buscar funcionarios por nomes
+	public Funcionario buscarFuncionarioPorNome(String nome) {
+	    List<Funcionario> funcionarios = getFuncionarios();
+
+	    if (funcionarios != null) {  // Verifica se a lista existe
+	        for (Funcionario f : funcionarios) { // Percorre cada funcionário da lista
+	            if (f.getNome().equalsIgnoreCase(nome)) { // Compara o nome do funcionário atual com o nome passado,
+	                return f;
+	            }
+	        }
+	    }
+
+	    return null;
+	}
+	
+	public String[] getNomesFuncionariosArray() {
+	    List<Funcionario> funcionarios = getFuncionarios();
+	    if (funcionarios != null) {
+	        String[] nomes = new String[funcionarios.size()];// Cria um array de String com o tamanho igual ao número de funcionários na lista
+	        for (int i = 0; i < funcionarios.size(); i++) {// Percorre a lista e para cada funcionário, pega o nome 
+	            nomes[i] = funcionarios.get(i).getNome();  // e coloca na posição correspondente do array
+	        }
+	        return nomes;
+	    }
+	    return new String[0]; //Se a lista for nula não irá retornar nada
+	}
+
 }

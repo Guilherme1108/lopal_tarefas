@@ -50,7 +50,10 @@ public class TarefaDAO {
 					tarefa.setIdentificacao(tarefaVetor[0]);
 					tarefa.setNome(tarefaVetor[1]);
 					tarefa.setDescricao(tarefaVetor[2]);
-					tarefa.setResponsavel(tarefaVetor[3]);
+					
+					FuncionarioDAO funcionarioDAO = new FuncionarioDAO(null);
+					tarefa.setResponsavel(funcionarioDAO.buscarFuncionarioPorNome(tarefaVetor[3]));
+					
 					tarefa.setDataInicio(tarefaVetor[4]);
 					tarefa.setPrazo(Integer.parseInt(tarefaVetor[5]));
 					tarefa.setDataEntrega(tarefaVetor[6]);
