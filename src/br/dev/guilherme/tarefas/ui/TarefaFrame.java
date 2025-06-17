@@ -14,7 +14,11 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
+import br.dev.guilherme.tarefas.dao.FuncionarioDAO;
+import br.dev.guilherme.tarefas.dao.TarefaDAO;
+import br.dev.guilherme.tarefas.model.Funcionario;
 import br.dev.guilherme.tarefas.model.Status;
+import br.dev.guilherme.tarefas.model.Tarefa;
 import br.dev.guilherme.tarefas.utils.Utils;
 
 public class TarefaFrame {
@@ -26,7 +30,6 @@ public class TarefaFrame {
 	private JLabel labelDataInicio;
 	private JLabel labelPrazo;
 	private JLabel labelDataEntrega;
-	private JLabel labelStatus;
 	
 	private JTextField txtIdentificacao;
 	private JTextField txtNome;
@@ -37,7 +40,6 @@ public class TarefaFrame {
 	private JTextArea txtDescricacao;
 	
 	private JComboBox<String> boxResponsavel;
-	private JComboBox<Status> boxStatus;
 	
 	private JButton btnSalvar;
 	private JButton btnSair;
@@ -48,7 +50,7 @@ public class TarefaFrame {
 	
 	private void criarTela(JFrame pai) {
 		JDialog telaTarefa = new JDialog(pai, true); //o JDialog foi a soluão para quando clicar em fechar não fechar tudo
-		telaTarefa.setSize(500, 700);
+		telaTarefa.setSize(500, 630);
 		telaTarefa.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		telaTarefa.setLayout(null);
 		telaTarefa.setResizable(false);
@@ -98,16 +100,11 @@ public class TarefaFrame {
 		txtDataEntrega = new JTextField();
 		txtDataEntrega.setBounds(10, 475, 150, 30);
 		
-		labelStatus = new JLabel("Status");
-		labelStatus.setBounds(10, 510, 150, 30);
-		boxStatus = new JComboBox<Status>();
-		boxStatus.setBounds(10, 540, 150, 30);
-		
 		btnSalvar = new JButton("Salvar");
-		btnSalvar.setBounds(10, 600, 150, 40);
+		btnSalvar.setBounds(10, 520, 150, 40);
 		
 		btnSair = new JButton("Sair");
-		btnSair.setBounds(180, 600, 150, 40);
+		btnSair.setBounds(180, 520, 150, 40);
 		
 		painel.add(labelIdentificacao);
 		painel.add(txtIdentificacao);
@@ -130,12 +127,31 @@ public class TarefaFrame {
 		painel.add(labelDataEntrega);
 		painel.add(txtDataEntrega);
 		
-		painel.add(labelStatus);
-		painel.add(boxStatus);
-		
 		painel.add(btnSalvar);
 		painel.add(btnSair);
 		
+		
+		btnSalvar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Tarefa t = new Tarefa(txtNome.getText());
+				t.setIdentificacao(txtIdentificacao.getText());
+				t.setDescricao(txtDescricacao.getText());
+//				t.setResponsavel(boxResponsavel.getSelectedIndex());
+				
+				TarefaDAO dao = new TarefaDAO(t);
+				boolean sucesso = dao.gravar();
+				
+				if (sucesso) {
+					JOptionPane.showMessageDialog(telaTarefa, "Tarefa criada com sucesso!");
+//					limparFormulario(); //chamando o limpar formulario se dar certo
+				} else {
+					JOptionPane.showMessageDialog(telaTarefa, "ocorreu um erro na gravação. \ntente novamente. \nSe o problema persistir, entre em contato com o suporte.");
+				}
+				
+			}
+		});
 		
 		btnSair.addActionListener(new ActionListener() {
 			
@@ -152,5 +168,13 @@ public class TarefaFrame {
 		});
 		
 		telaTarefa.setVisible(true);
+	}
+	
+	
+	private void limparFormulario() {
+		txtIdentificacao.setText(Utils.gerarUUID8());
+		txtNome.setText(null);
+		txtDescricacao.setText(null);
+		
 	}
 }

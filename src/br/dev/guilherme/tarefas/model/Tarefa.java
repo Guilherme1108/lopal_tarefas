@@ -20,8 +20,8 @@ public class Tarefa {
 	private String dataEntregaFormatada;
 
 	// construtor
-	public Tarefa(Funcionario responsalvel) {
-		this.responsavel = responsalvel;
+	public Tarefa(String nome) {
+		setNome(nome);
 		this.identificacao = Utils.gerarUUID8();
 	}
 
