@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class ArquivoTarefasFactory {
 	
-	private String caminhoTarefas = "C:\\Users\\guilh\\Documents\\caminhoDosArquivos/tarefas.csv.txt"; // criando um caminho para o arquivo
+	private String caminhoTarefas = "/Users/25133025/projetoTarefas/tarefas.csv"; // criando um caminho para o arquivo
 	private FileWriter fw;
 	private BufferedWriter bw;
 	private FileReader fr;
